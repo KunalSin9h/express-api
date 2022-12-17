@@ -14,9 +14,9 @@ router.post("/product", body('name').isString(), handelInputError, async (req: R
     await prisma.product.create({
         data: {
             name: req.body.name,
-            updatedAt: new Date(),
             // @ts-ignore
             userId: req.user.id,
+            updatedAt: new Date(),
         }
     });
     res.status(200).json({
@@ -57,7 +57,7 @@ router.get("/product/:id", async (req: Request, res: Response) => {
     }
 }); // `R` Get product with id `id`
 
-router.put("/product/:id", body('name').isString(), handelInputError,  async (req: Request, res: Response) => {
+router.put("/product/:id", body('name').isString(), handelInputError,  async (req: Request, res: Response, next: NextFunction) => {
     try {
         const product = await prisma.product.update({
             where: {
@@ -69,7 +69,6 @@ router.put("/product/:id", body('name').isString(), handelInputError,  async (re
             },
             data: {
                 name: req.body.name,
-                updatedAt: new Date()
             }
         });
         res.status(200).json({
@@ -112,7 +111,7 @@ router.delete("/product/:id",async (req: Request, res: Response) => {
 /**
  * Update
  */
-router.post("/update", body('productId').isString(), body('title').isString(), body('body').isString(), body('productId').isString(), async (req: Request, res: Response) => {
+router.post("/update", body('title').isString(), body('body').isString(), body('productId').isString(), async (req: Request, res: Response) => {
 
     const product = await prisma.product.findUnique({
         where: {
@@ -128,10 +127,7 @@ router.post("/update", body('productId').isString(), body('title').isString(), b
     }
 
     const update = await prisma.update.create({
-        data: {
-            updatedAt: new Date(),
-            ...req.body
-        }
+        data: req.body,
     });
     res.status(200).json({
         "message": "Update Created",
