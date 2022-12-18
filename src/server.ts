@@ -16,7 +16,7 @@ const app = express();
  * Global Middleware
  */
 app.use(cors()); // cors -> cross origin research share | Block the client
-app.use(morgan('dev')); // for logging each request
+app.use(morgan('dev'));
 app.use(express.json()); // for allowing client to send json
 app.use(express.urlencoded({extended: true})) // for using query sting & request params efficiently
 

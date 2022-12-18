@@ -6,7 +6,7 @@
     "module": "CommonJS",
     "rootDir": "./src",
     "moduleResolution": "node",
-    "types": ["node"],
+    "types": ["node", "jest"],
     "resolveJsonModule": true,
     "outDir": "./dist/",
     "esModuleInterop": true,
@@ -14,5 +14,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["./src/**/*.ts", "src/router.ts", "src/index.ts", "src/server.ts"]
+  "include": ["./src/**/*.ts", "src/router.ts", "src/index.ts", "src/server.ts"],
+  "exclude": ["./src/**/__tests__"]
 }

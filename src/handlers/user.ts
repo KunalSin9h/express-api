@@ -2,7 +2,7 @@ import prisma from "../db";
 import { comparePassword, createJWT, hashPassword } from "../modules/auth";
 import { NextFunction, Request, Response } from "express";
 
-export const createNewUser =  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const createNewUser =  async (req: Request , res: Response, next: NextFunction): Promise<void> => {
     try {
         const user = await prisma.user.create({
             data: {
